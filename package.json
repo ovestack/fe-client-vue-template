@@ -45,5 +45,18 @@
     "koa-cors": "0.0.16",
     "koa-router": "^5.4.0",
     "mockjs": "^1.0.0"
-  }
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/otarim/vue-starter.git"
+  },
+  "keywords": [
+    "vue-starter"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/otarim/vue-starter/issues"
+  },
+  "homepage": "https://github.com/otarim/vue-starter#readme"
 }

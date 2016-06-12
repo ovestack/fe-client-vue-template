@@ -45,12 +45,13 @@ module.exports = merge(baseWebpackConfig, {
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
       filename: process.env.NODE_ENV === 'testing' ? 'index.html' : config.build.index,
-      template: 'index.html',
+      template: 'index.ejs',
       inject: true,
       minify: {
         removeComments: true,
         collapseWhitespace: true,
-        removeAttributeQuotes: true
+        removeAttributeQuotes: true,
+        removeRedundantAttributes: false
           // more options:
           // https://github.com/kangax/html-minifier#options-quick-reference
       },
