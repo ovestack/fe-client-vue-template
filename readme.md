@@ -13,17 +13,15 @@ a vue scaffolding,using vue(2.0) + vue-router(2.0) + vuex(2.0)
 ## application structure
 
         ├── action // app actions
-        ├── assets
-        │   └── logo.png // app common asserts
+        ├── assets // app common asserts
         ├── components  // app components
-        │   └── posts
-        │       └── index.vue
-        ├── main.js // app entry
-        ├── router.js // app router
+        ├── pages  // app router component
         └── store // app store
             ├── index.js //app store entry
-            └── posts // state and mutations for every module 
+            └── index // state and mutations for every module 
                 └── index.js
+        ├── main.js // app entry
+        ├── router.js // app router
 
 ## mock
 

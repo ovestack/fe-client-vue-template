@@ -4,8 +4,8 @@ const state = {
 }
 
 const mutations = {
-	'index/INIT': function(state) {
-		state.data = [1, 2, 3]
+	'index/INIT': function(state,payload) {
+		state.data = payload.data
 	}
 }
 

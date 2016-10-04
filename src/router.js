@@ -7,7 +7,7 @@ var routes = [{
     path: '/',
     name: 'index',
     component: function(resolve) {
-        return require(['components/index'], resolve)
+        return require(['pages/index'], resolve)
     }
 }]
 

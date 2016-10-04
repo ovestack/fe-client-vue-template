@@ -11,6 +11,7 @@
                 {{item}}
             </li>
         </ul>
+        <loading></loading>
     </section>
 </template>
 <script>
@@ -31,6 +32,9 @@ export default {
         ...mapActions({
             init: 'index/INIT'
         })
+    },
+    components: {
+        loading: require('components/loading')
     }
 }
 </script>
