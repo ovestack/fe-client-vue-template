@@ -12,6 +12,7 @@ a vue scaffolding,using vue(2.0) + vue-router(2.0) + vuex(2.0)
 
 ## application structure
 
+        ├── action // app actions
         ├── assets
         │   └── logo.png // app common asserts
         ├── components  // app components
