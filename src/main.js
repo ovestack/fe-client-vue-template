@@ -1,10 +1,10 @@
 import Vue from 'vue'
-// import App from './App'
-import store from './store/'
 import router from './router'
+import store from 'store'
 
 document.addEventListener('DOMContentLoaded', function() {
-	router.start(Vue.extend({
-		store
-	}), '#app')
+    new Vue({
+        store,
+        router
+    }).$mount('#app')
 })

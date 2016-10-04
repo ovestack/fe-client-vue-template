@@ -1,6 +1,6 @@
-#vue-starter
+#vue-starter(2.0)
 
-a vue scaffolding,using vue + vue-router + vuex,fork from [vue-cli](https://github.com/vuejs/vue-cli)
+a vue scaffolding,using vue(2.0) + vue-router(2.0) + vuex(2.0)
 
 ## dev
 
@@ -12,8 +12,6 @@ a vue scaffolding,using vue + vue-router + vuex,fork from [vue-cli](https://gith
 
 ## application structure
 
-        ├── action // app actions
-        │   └── index.js // app actions entry
         ├── assets
         │   └── logo.png // app common asserts
         ├── components  // app components
