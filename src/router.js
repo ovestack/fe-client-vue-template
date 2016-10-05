@@ -12,7 +12,7 @@ var routes = [{
 }]
 
 var router = new VueRouter({
-	hashbang: false,
+	mode: 'history',
     routes
 })
 
