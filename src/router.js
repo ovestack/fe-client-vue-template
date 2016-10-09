@@ -7,21 +7,35 @@ var router = new VueRouter({
 	hashbang: false
 })
 
-router.map({
-	'/': {
-		name: 'index',
-		component: function(resolve) {
-			return require(['./components/posts/'], resolve)
-		}
-	}
-})
+var buildMap = function(rules) {
+    var ret = {}
+    for(var i in rules) {
+        if (rules.hasOwnProperty(i)) {
+            var rule = rules[i]
+            ret[i] = {
+                name: rule.name,
+                component: (function(rule){
+                    return function(resolve) {
+                        require(['./pages' + rule.file],resolve)
+                    }
+                })(rule)
+            }
+            if (rule.subRoutes) {
+                ret[i].subRoutes = buildMap(rule.subRoutes)
+            }
+        }
+    }
+    return ret
+}
 
-router.alias({
-	'/posts': '/'
-})
+var routerMap = buildMap(__ROUTER_MAP__)
+
+router.map(routerMap)
 
 router.redirect({
 	'*': '/',
 })
+
+routerMap = null
 
 export default router

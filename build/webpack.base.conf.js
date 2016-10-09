@@ -18,11 +18,17 @@ module.exports = {
     alias: {
       'src': path.resolve(__dirname, '../src'),
       'assets': path.resolve(__dirname, '../src/assets'),
+      'action': path.resolve(__dirname, '../src/action'),
+      'store': path.resolve(__dirname, '../src/store'),
+      'pages': path.resolve(__dirname, '../src/pages'),
       'components': path.resolve(__dirname, '../src/components')
     }
   },
   resolveLoader: {
-    fallback: [path.join(__dirname, '../node_modules')]
+    fallback: [path.join(__dirname, '../node_modules')],
+    alias: {
+        router: path.join(__dirname, './router-loader')
+    }
   },
   module: {
     loaders: [
@@ -32,7 +38,7 @@ module.exports = {
       },
       {
         test: /\.js$/,
-        loader: 'babel',
+        loaders: ['babel','router'],
         include: projectRoot,
         exclude: /node_modules/
       },
