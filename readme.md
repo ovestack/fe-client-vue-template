@@ -1,4 +1,4 @@
-#vue-starter(2.0)
+#vue-starter(2.1-beta)
 
 a vue scaffolding,using vue(2.0) + vue-router(2.0) + vuex(2.0)
 
