@@ -44,8 +44,8 @@ module.exports = merge(baseWebpackConfig, {
     // you can customize output by editing /index.html
     // see https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
-      filename: process.env.NODE_ENV === 'testing' ? 'index.html' : config.build.index,
-      template: 'index.ejs',
+      filename: 'index.html',
+      template: path.resolve(__dirname, '../index.ejs'),
       inject: true,
       minify: {
         removeComments: true,

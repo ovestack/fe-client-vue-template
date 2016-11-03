@@ -1,10 +1,10 @@
 {
   "name": "vue-starter",
-  "version": "2.0.0",
+  "version": "2.1",
   "description": "A Vue.js scaffolding",
   "author": "otarim.com@gmail.com",
   "scripts": {
-    "dev": "node build/dev-server.js",
+    "dev": "node build/dev.js",
     "build": "node build/build.js"
   },
   "dependencies": {
