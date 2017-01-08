@@ -4,7 +4,7 @@
   "description": "A Vue.js scaffolding",
   "author": "otarim.com@gmail.com",
   "scripts": {
-    "dev": "node build/dev.js",
+    "dev": "node build/dev-server.js",
     "build": "node build/build.js"
   },
   "dependencies": {
@@ -20,7 +20,7 @@
     "vue-style-loader": "^1.0.0",
     "vuex": "^2.0.0",
     "webpack": "^1.13.2",
-    "webpack-dev-middleware": "^1.8.3"
+    "webpack-dev-middleware": "https://github.com/otarim/webpack-dev-middleware.git"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",
