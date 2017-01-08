@@ -4,12 +4,12 @@ var merge = require('webpack-merge')
 var pkgConfig = require('../package.json')
 var version = pkgConfig.version || ''
 
-var assetsRoot = path.resolve(__dirname, '../../public', version)
+var assetsRoot = path.resolve(__dirname, '../public/', version)
 
 var base = {
     assetsRoot: assetsRoot,
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/' + (version ? version + '/' : '')
+    assetsPublicPath: '/'
 }
 
 module.exports = {
