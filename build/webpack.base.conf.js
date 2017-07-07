@@ -24,11 +24,6 @@ module.exports = {
             'pages': path.resolve(__dirname, '../src/pages'),
             'components': path.resolve(__dirname, '../src/components'),
             'modules': path.resolve(__dirname, '../src/modules'),
-            'echarts-map-data': path.resolve(__dirname,
-                '../src/assets/lib/echarts-map-data/1.0.0/echarts-map-data.js'
-            ),
-            'data-tool': path.resolve(__dirname,
-                '../src/assets/lib/data-tool/1.0.0/data-tool.js'),
             'vue$': 'vue/dist/vue.esm.js'
         }
     },
