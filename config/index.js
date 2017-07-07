@@ -4,7 +4,15 @@ var merge = require('webpack-merge')
 var pkgConfig = require('../package.json')
 var version = pkgConfig.version || ''
 
-var assetsRoot = path.resolve(__dirname, '../public/', version)
+var assetsRoot = path.resolve(__dirname, '../public')
+
+var argv = {};
+process.argv.forEach(function(item){
+    if(item.indexOf("=") !== -1){
+        item = item.split("=");
+        argv[item[0]] = item[1] || undefined;
+    }
+});
 
 var base = {
     assetsRoot: assetsRoot,
@@ -13,14 +21,12 @@ var base = {
 }
 
 module.exports = {
-  build: merge(base, {
-    env: require('./prod.env'),
-    productionSourceMap: true
-  }),
-  dev: merge(base, {
-    env: require('./dev.env'),
-    port: 8080,
-    mockPort: 12345,
-    proxyTable: {}
-  })
+    build: merge(base, {
+        env: require('./prod.env'),
+        productionSourceMap: false
+    }),
+    dev: merge(base, {
+        env: require('./dev.env'),
+        port: 8080
+    })
 }
