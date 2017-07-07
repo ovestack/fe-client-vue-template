@@ -1,4 +1,4 @@
-#vue-starter(3.0.0)
+# vue-starter(3.0.0)
 
 a vue scaffolding, using vue(2.0) + vue-router(2.0) + vuex(2.0) + webpack(2.0)
 
