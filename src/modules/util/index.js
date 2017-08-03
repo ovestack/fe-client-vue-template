@@ -6,28 +6,20 @@ function isType(type){
 		return Object.prototype.toString.call(el) === '[object '+type+']'
 	}
 }
-var isArray = isType('Array')
-var isObject = isType('Object')
-var isFunction = isType('Function')
-var isString = isType('String')
-var isNumber = isType('Number');
-var isBoolean = isType('Boolean');
+export var isArray = isType('Array')
+export var isObject = isType('Object')
+export var isFunction = isType('Function')
+export var isString = isType('String')
+export var isNumber = isType('Number');
+export var isBoolean = isType('Boolean');
 
-var isUndefined = function(obj){
+export var isUndefined = function(obj){
 	return typeof obj === 'undefined'
 }
-exports.isArray = isArray
-exports.isObject = isObject
-exports.isFunction = isFunction
-exports.isString = isString
-exports.isUndefined = isUndefined
-exports.isNumber = isNumber
-exports.isBoolean = isBoolean
 
-function isEmptyObject(obj){
+export function isEmptyObject(obj){
 	return Object.keys(obj).length === 0
 }
-exports.isEmptyObject = isEmptyObject
 
 function mergeDeep(target, ...sources) {
     if (!sources.length) return target
@@ -45,14 +37,11 @@ function mergeDeep(target, ...sources) {
     return mergeDeep(target, ...sources);
 }
 
-exports.merge = mergeDeep
+export var merge = mergeDeep
 
-
-var copy = function(target) {
+export var copy = function(target) {
     return JSON.parse(JSON.stringify(target))
 }
-
-exports.copy = copy
 
 
 /**
@@ -92,12 +81,10 @@ function getEnv() {
     return env;
 }
 
-var ENV = getEnv();
-
-exports.env = ENV;
+export var env = getEnv();
 
 // cookie写操作，过期时间单位(s)
-exports.setCookie = function(name, value, config){
+export var setCookie = function(name, value, config){
     config = exports.merge({
         path: '/'
     }, config || {})
@@ -114,11 +101,11 @@ exports.setCookie = function(name, value, config){
     return document.cookie = cookie.join(';')
 }
 
-exports.getCookie = function(name){
+export var getCookie = function(name){
     return document.cookie.replace(new RegExp('.*(?:^|; )' + name + '=([^;]*).*|.*'), '$1')
 }
 
-exports.removeCookie = function(name, path){
+export var removeCookie = function(name, path){
     path = path || '/'
     // expires=Thu, 01 Jan 1970 00:00:00 GMT
     var value = exports.getCookie(name)

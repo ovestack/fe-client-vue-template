@@ -74,6 +74,7 @@ module.exports = merge(baseWebpackConfig, {
                 return count >= 2
             }
         }),
-        new webpack.HashedModuleIdsPlugin()
+        new webpack.HashedModuleIdsPlugin(),
+        new webpack.optimize.ModuleConcatenationPlugin()
     ]
 })

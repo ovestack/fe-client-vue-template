@@ -1,9 +1,14 @@
 import Vue from 'vue'
-import util from 'modules/util'
+import {
+    isUndefined,
+    isBoolean,
+    isFunction,
+    merge
+} from 'modules/util'
 import './index.less'
 
 var valueIsEmpty = function(val) {
-    return val === null || util.isUndefined(val) || String(val).trim() === ''
+    return val === null || isUndefined(val) || String(val).trim() === ''
 }
 
 export default {
@@ -43,7 +48,7 @@ export default {
             Vue.set(this.model, key, val)
         },
         buildRow(config) {
-            if (util.isBoolean(config.hide) && config.hide || util.isFunction(config.hide) && config.hide(this.model)) return
+            if (isBoolean(config.hide) && config.hide || isFunction(config.hide) && config.hide(this.model)) return
             return (
                 <div class={{
                     'M-formRow': true,
@@ -63,10 +68,10 @@ export default {
             if (config.mod) {
                 var Mod = config.mod
                 return this.$createElement(config.mod, {
-                    props: util.merge({}, config.props, {
+                    props: merge({}, config.props, {
                         value: model[config.key]
                     }),
-                    attrs: util.merge({}, config.attrs),
+                    attrs: merge({}, config.attrs),
                     on: {
                         input(value) {
                             config.data = value
@@ -83,7 +88,7 @@ export default {
             var model = this.model,
                 validator = this.validator
             var item = model[key]
-            if (validator[key] && util.isFunction(validator[key].getVal)) {
+            if (validator[key] && isFunction(validator[key].getVal)) {
                 return validator[key].getVal(item, model)
             } else {
                 return item
@@ -104,12 +109,12 @@ export default {
                 data[key] = val
                 let validator = validateors[key]
                 if (validator) {
-                    if (util.isFunction(validator.validate)) {
+                    if (isFunction(validator.validate)) {
                         if (validator.validate(val, model)) {
                             Vue.set(conf, '$invalid', false)
                             continue
                         } else {
-                            if (!util.isUndefined(validator.tip)) {
+                            if (!isUndefined(validator.tip)) {
                                 this.$tip(validator.tip)
                             }
                             Vue.set(conf, '$invalid', true)
