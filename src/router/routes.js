@@ -1,14 +1,3 @@
-// 添加路由
-// 声明路由规则, filePath相对路径为 pages,用于动态加载路由文件
-var testRouter = {
-    path: '/test'
-}
-
-// 路由配置，新增的路由需要调用 addRouter加入到路由中
-var routers = addRouter(
-    testRouter
-)
-
 function addRouter(...routes) {
     var route = []
     routes.forEach(function(r) {
@@ -46,6 +35,19 @@ function buildRouter(routes) {
         }
     })
 }
+
+var routers = []
+
+// 获取所有页面路由配置
+var resolvers = require.context('../pages', true, /\/route\.js$/)
+
+resolvers.keys().forEach(function(r) {
+    var route = resolvers(r)
+    if (resolvers(r).default) {
+        route = resolvers(r).default
+    }
+    routers = addRouter(route)
+})
 
 buildRouter(routers)
 
