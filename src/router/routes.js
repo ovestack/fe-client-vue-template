@@ -1,12 +1,3 @@
-function addRouter(...routes) {
-    var route = []
-    routes.forEach(function(r) {
-        r = [].concat(r)
-        route.push.apply(route, r)
-    })
-    return route
-}
-
 function Camelize(prop){
     if (prop.indexOf('/') === 0) {
         prop = prop.slice(1)
@@ -19,6 +10,10 @@ function Camelize(prop){
 // 生成路由规则
 function buildRouter(routes) {
     routes.forEach(function(route) {
+        if (route.isRoute === false) {
+            delete route.isRoute
+            return
+        }
         route.name = Camelize(route.filePath || route.path)
         route.meta = route.meta || {}
         route.meta.matchPath = route.path
@@ -38,6 +33,13 @@ function buildRouter(routes) {
 
 var routers = []
 
+function addRouter(...routes) {
+    routes.forEach(function(r) {
+        r = [].concat(r)
+        routers.push.apply(routers, r)
+    })
+}
+
 // 获取所有页面路由配置
 var resolvers = require.context('../pages', true, /\/route\.js$/)
 
@@ -46,7 +48,7 @@ resolvers.keys().forEach(function(r) {
     if (resolvers(r).default) {
         route = resolvers(r).default
     }
-    routers = addRouter(route)
+    addRouter(route)
 })
 
 buildRouter(routers)
