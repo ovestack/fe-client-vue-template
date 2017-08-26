@@ -1,10 +1,14 @@
+import 'es6-promise/auto'
 import Vue from 'vue'
-// import App from './App'
-import store from './store/'
-import router from './router'
+import router from 'router'
+import store from 'store'
 
-document.addEventListener('DOMContentLoaded', function() {
-	router.start(Vue.extend({
-		store
-	}), '#app')
-})
+require('modules/mixins')
+require('modules/directives')
+require('modules/filters')
+require('modules/components')
+
+new Vue({
+    router,
+    store
+}).$mount('#app')
