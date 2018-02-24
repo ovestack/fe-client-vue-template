@@ -56,8 +56,8 @@ module.exports = {
             query: {
                 limit: 5000,
                 name: utils.assetsPath(process.env.NODE_ENV ===
-                    'production' ? 'img/[name].[hash:7].[ext]' :
-                    'img/[name].[ext]')
+                    'production' ? 'img/[hash:7].[ext]' :
+                    'img/[name].[hash:5].[ext]')
             }
         }, {
             test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,

@@ -16,8 +16,8 @@ module.exports = {
         dll: dlls
     },
     output: {
-        path: config.build.assetsRoot,
-        publicPath: config.build.assetsPublicPath,
+        path: config.dev.assetsRoot,
+        publicPath: config.dev.assetsPublicPath,
         filename: utils.assetsPath('js/lib/[name].js'),
         library: '[name]'
     },
@@ -33,7 +33,7 @@ module.exports = {
             /**
              * path 定义 manifest 文件生成的位置
              */
-            path: path.resolve(__dirname, config.build.assetsRoot,
+            path: path.resolve(__dirname, config.dev.assetsRoot,
                 utils.assetsPath('js/lib/manifest.json')),
             name: '[name]',
             /**

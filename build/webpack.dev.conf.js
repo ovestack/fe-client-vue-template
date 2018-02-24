@@ -20,6 +20,7 @@ module.exports = merge(baseWebpackConfig, {
     devtool: '#source-map',
     output: {
         path: config.dev.assetsRoot,
+        publicPath: config.dev.assetsPublicPath,
         filename: utils.assetsPath('js/[name].[hash:6].js'),
         chunkFilename: utils.assetsPath('js/[name].[chunkhash:6].chunk.js')
     },
@@ -33,7 +34,7 @@ module.exports = merge(baseWebpackConfig, {
         // https://github.com/ampedandwired/html-webpack-plugin
         new HtmlWebpackPlugin({
             filename: 'index.html',
-            dllfile: config.build.assetsPublicPath + 'static/js/lib/dll.js',
+            dllfile: config.dev.assetsPublicPath + 'static/js/lib/dll.js',
             template: path.resolve(__dirname, '../index.ejs'),
             inject: true
         }),
