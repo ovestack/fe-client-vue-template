@@ -12,7 +12,10 @@ var compiler = webpack(webpackConfig)
 connect()
 .use(hotMiddleware(compiler))
 .use(history())
-.use(serveStatic(config.dev.assetsRoot))
+.use(serveStatic(config.dev.assetsRoot, {
+    etag: false,
+    lastModified: false
+}))
 .use(webpackMiddleware(compiler, {
     publicPath: config.dev.assetsRoot,
     stats: {
