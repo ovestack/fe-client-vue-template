@@ -19,7 +19,8 @@ export default {
             default() {
                 return {}
             }
-        }
+        },
+        lang: Object
     },
     data() {
         return {
@@ -27,6 +28,10 @@ export default {
         }
     },
     created () {
+        if (this.lang) {
+            var messages = this._i18n._vm.$data.messages
+            Vue.set(this._i18n._vm, 'messages', merge({}, messages, this.lang))
+        }
         this.config.forEach(function(conf) {
             Vue.set(this.model, conf.key, conf.data)
         }, this)
@@ -55,7 +60,7 @@ export default {
                     'error': config.$invalid
                 }}>
                     <div class="M-formRowLabel" data-required={config.required}>
-                        {config.text}
+                        {this.$t('form.key2')}
                     </div>
                     <div class="M-formCon">
                         {this.buildCon(config)}
