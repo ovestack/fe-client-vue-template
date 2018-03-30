@@ -44,7 +44,11 @@ module.exports = {
             }
         }, {
             test: /\.js$/,
-            loader: 'babel-loader',
+            use: [{
+                loader: 'babel-loader'
+            }, {
+                loader: path.join(__dirname, './router-loader')
+            }],
             include: projectRoot,
             exclude: /node_modules/
         }, {

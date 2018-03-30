@@ -5,6 +5,8 @@
             {{msg}}
         </p>
         <button @click="onTestVuex('hahahahhsss')">test vuex</button>
+        <button @click="onGo">go inner</button>
+        <router-view></router-view>
     </div>
 </template>
 
@@ -107,7 +109,10 @@ export default {
     methods: {
         ...mapActions({
             onTestVuex: 'test:ACTION'
-        })
+        }),
+        onGo() {
+            this.$router.push('/test/inner')
+        }
     },
     components: {
         vForm
