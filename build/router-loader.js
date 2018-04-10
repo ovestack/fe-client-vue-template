@@ -109,7 +109,6 @@ if (routeMap.hasOwnProperty('/index')) {
 }
 
 module.exports = function(content) {
-    this.cacheable()
     content = content.replace('__ROUTER_MAP__',JSON.stringify(routeMap))
     return content
 }
