@@ -4,7 +4,8 @@ const path = require('path'),
 
 var routeMap = {
     _pwd: '',
-    _parent: ''
+    _parent: '',
+    root: {}
 }
 
 function removeCircular(obj) {
@@ -99,17 +100,18 @@ function genRouterMap(dir,map,parent){
     return map
 }
 
-routeMap['/'] = {}
-genRouterMap(DIR,routeMap['/'],routeMap)
+genRouterMap(DIR, routeMap.root, routeMap)
 removeCircular(routeMap)
-if (routeMap.hasOwnProperty('/index')) {
-    routeMap['/'] = routeMap['/index']
-    routeMap['/index'] = null
-    delete routeMap['/index']
-}
+var root = routeMap.root
+delete routeMap.root
+root.subRoutes = routeMap
+routeMap = JSON.stringify({
+    '/': root
+}, null ,4)
+root = null
 
 module.exports = function(content) {
     this.cacheable()
-    content = content.replace('__ROUTER_MAP__',JSON.stringify(routeMap))
+    content = content.replace('__ROUTER_MAP__', routeMap)
     return content
 }
