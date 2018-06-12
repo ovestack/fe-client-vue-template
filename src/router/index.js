@@ -36,6 +36,11 @@ var routes = []
 
 buildMap(__ROUTER_MAP__, routes)
 
+routes.push({
+    path: '*',
+    redirect: '/'
+})
+
 var router = new VueRouter({
     mode: 'history',
     routes: routes
