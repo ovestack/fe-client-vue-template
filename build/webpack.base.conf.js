@@ -37,13 +37,15 @@ module.exports = {
                 'cache-loader', {
                 loader: 'vue-loader',
                 options: {
-                loaders: utils.cssLoaders(process.env.NODE_ENV ===
+                loaders: Object.assign(utils.cssLoaders(process.env.NODE_ENV ===
                     'production' ? {
                         sourceMap: config.build.productionSourceMap,
                         extract: true,
                         usePostcss: true
-                    } : {})
-                }
+                    } : {}), {
+                        i18n: '@kazupon/vue-i18n-loader'
+                    })
+                } 
             }]
         }, {
             test: /\.js$/,

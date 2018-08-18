@@ -1,6 +1,11 @@
 <template>
     <div class="P-test">
-        <v-form :config="config" :validator="validator" ref="form"></v-form>
+        <select v-model="$i18n.locale">
+            <option value="ja">日本语</option>
+            <option value="cn">中文</option>
+            <option value="en">English</option>
+        </select>
+        <v-form :config="config" :validator="validator" :lang="lang" ref="form"></v-form>
         <p>
             {{msg}}
         </p>
@@ -33,70 +38,32 @@ export default {
                 }
             },
             config: [{
-                text: '标题2',
                 mod: 'v-input',
                 key: 'key2',
+                lang: 'form.key2',
                 required: true,
                 props: {
                     config: {}
                 },
                 data: 'sadsdasdada'
-            },{
-                text: '标题3',
-                mod: 'v-select',
-                key: 'key3',
-                props: {
-                    config: {
-                        defOption: 'xxxx',
-                        options: opts
+            }],
+            lang: {
+                ja: {
+                    form: {
+                        key2: 'タイトル2'
                     }
                 },
-                data: 11
-            },{
-                text: '标题4',
-                mod: 'v-textarea',
-                key: 'key4',
-                required: true,
-                props: {
-                    config: {
-                        placeholder: '啊哈啊啊啊啊'
+                cn: {
+                    form: {
+                        key2: '标题2'
                     }
                 },
-                data: 111
-            },{
-                text: '标题5',
-                mod: 'v-checkbox',
-                key: 'key5',
-                props: {
-                    config: {
-                        options: opts
+                en: {
+                    form: {
+                        key2: 'title2'
                     }
-                },
-                data: ['12']
-            },{
-                text: '标题6',
-                mod: 'v-checkbox',
-                key: 'key6',
-                props: {
-                    config: {
-                        text: 'aaaa'
-                    }
-                },
-                data: false
-            },{
-                text: '标题7',
-                mod: 'v-radio',
-                key: 'key7',
-                props: {
-                    config: {
-                        options: opts
-                    }
-                },
-                data: 12,
-                hide: function(model) {
-                    return !model.key6
                 }
-            }]
+            }
         }
     },
     computed: {
