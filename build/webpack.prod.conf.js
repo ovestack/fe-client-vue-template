@@ -4,11 +4,9 @@ var utils = require('./utils')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
-var ExtractTextPlugin = require('extract-text-webpack-plugin')
+var MiniCssExtractPlugin = require('mini-css-extract-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
-var env = process.env.NODE_ENV === 'testing' ? require('../config/test.env') :
-    config.build.env
 
 module.exports = merge(baseWebpackConfig, {
     module: {
@@ -25,18 +23,8 @@ module.exports = merge(baseWebpackConfig, {
         chunkFilename: utils.assetsPath('js/[name].[chunkhash:6].js')
     },
     plugins: [
-        // http://vuejs.github.io/vue-loader/workflow/production.html
-        new webpack.DefinePlugin({
-            'process.env': env
-        }),
-        new webpack.optimize.UglifyJsPlugin({
-            compress: {
-                warnings: false
-            },
-            sourceMap: config.build.productionSourceMap
-        }),
         // extract css into its own file
-        new ExtractTextPlugin({
+        new MiniCssExtractPlugin({
             filename: utils.assetsPath('css/[name].[contenthash:6].css')
         }),
         new OptimizeCSSPlugin(),
@@ -58,23 +46,29 @@ module.exports = merge(baseWebpackConfig, {
             // necessary to consistently work with multiple chunks via CommonsChunkPlugin
             chunksSortMode: 'dependency'
         }),
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest'
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            async: 'common-lib',
-            minChunks: function(module) {
-                module.resource &&
-                module.resource.includes('node_modules')
+        new webpack.HashedModuleIdsPlugin()
+    ],
+    mode: 'production',
+    // https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
+    optimization: {
+        runtimeChunk: true,
+        splitChunks: {
+            cacheGroups: {
+                'common-chunk': {
+                    chunks: 'async',
+                    minChunks: 2,
+                    name: 'common-chunk'
+                },
+                'common-lib': {
+                    chunks: 'async',
+                    name: 'common-lib',
+                    enforce: true,
+                    test: function(module) {
+                        return module.resource &&
+                        module.resource.includes('node_modules')
+                    }
+                }
             }
-        }),
-        new webpack.optimize.CommonsChunkPlugin({
-            async: 'common-chunk',
-            minChunks: function(module, count) {
-                return count >= 2
-            }
-        }),
-        new webpack.HashedModuleIdsPlugin(),
-        new webpack.optimize.ModuleConcatenationPlugin()
-    ]
+        }
+    }
 })

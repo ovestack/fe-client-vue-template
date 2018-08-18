@@ -33,20 +33,24 @@ module.exports = {
     module: {
         rules: [{
             test: /\.vue$/,
-            loader: 'vue-loader',
-            options: {
+            use: [
+                'cache-loader', {
+                loader: 'vue-loader',
+                options: {
                 loaders: utils.cssLoaders(process.env.NODE_ENV ===
                     'production' ? {
                         sourceMap: config.build.productionSourceMap,
                         extract: true,
                         usePostcss: true
                     } : {})
-            }
+                }
+            }]
         }, {
             test: /\.js$/,
-            use: [{
-                loader: 'babel-loader'
-            }, {
+            use: [
+                'cache-loader',
+                'babel-loader',
+            {
                 loader: path.join(__dirname, './router-loader')
             }],
             include: projectRoot,

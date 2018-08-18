@@ -42,5 +42,6 @@ module.exports = {
              */
             context: __dirname //是解析包路径的上下文，这个要跟接下来配置的 webpack.config.js 一致。
         })
-    ]
+    ],
+    mode: 'development'
 }

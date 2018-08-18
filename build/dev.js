@@ -20,7 +20,7 @@ connect()
     publicPath: config.dev.assetsRoot,
     stats: {
         colors: true,
-        chunks: false
+        modules: false
     },
     fs: require('fs')
 }))

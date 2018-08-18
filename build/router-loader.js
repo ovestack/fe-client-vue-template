@@ -111,7 +111,6 @@ routeMap = JSON.stringify({
 root = null
 
 module.exports = function(content) {
-    this.cacheable()
     content = content.replace('__ROUTER_MAP__', routeMap)
     return content
 }
