@@ -1,11 +1,12 @@
 {
-  "name": "vue-starter",
-  "version": "4.0.0",
-  "description": "webpack 4.0",
+  "name": "{{name}}",
+  "version": "{{version}}",
+  "description": "{{description}}",
   "scripts": {
     "dev": "node build/dev.js",
     "build": "node build/build.js",
-    "dll": "webpack --config build/webpack.dll.conf.js"
+    "dll": "webpack --config build/webpack.dll.conf.js",
+    "start": "npm run dll && npm run dev"
   },
   "dependencies": {
     "@kazupon/vue-i18n-loader": "^0.3.0",
