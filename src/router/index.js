@@ -2,12 +2,12 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
-var buildMap = function(rules, routes) {
+var buildMap = function(rules, routes, isSub) {
     for(var i in rules) {
         if (rules.hasOwnProperty(i)) {
             var rule = rules[i]
             var ret = {
-                path: i,
+                path: isSub ? i.slice(1) : i,
                 name: rule.name,
                 component: rule.file && (function(rule){
                     return function(resolve) {
@@ -20,7 +20,7 @@ var buildMap = function(rules, routes) {
             }
             if (rule.subRoutes) {
                 ret.children = []
-                buildMap(rule.subRoutes, ret.children)
+                buildMap(rule.subRoutes, ret.children, true)
             }
             routeHook(ret, rules, i)
             routes.push(ret)

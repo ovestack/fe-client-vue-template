@@ -34,17 +34,17 @@ module.exports = {
         rules: [{
             test: /\.vue$/,
             use: [
-                'cache-loader', {
-                loader: 'vue-loader',
-                options: {
-                loaders: Object.assign(utils.cssLoaders(process.env.NODE_ENV ===
-                    'production' ? {
-                        sourceMap: config.build.productionSourceMap,
-                        extract: true,
-                        usePostcss: true
-                    } : {}), {
-                        i18n: '@kazupon/vue-i18n-loader'
-                    })
+                {
+                    loader: 'vue-loader',
+                    options: {
+                    loaders: Object.assign(utils.cssLoaders(process.env.NODE_ENV ===
+                        'production' ? {
+                            sourceMap: config.build.productionSourceMap,
+                            extract: true,
+                            usePostcss: true
+                        } : {}), {
+                            i18n: '@kazupon/vue-i18n-loader'
+                        })
                 } 
             }]
         }, {
