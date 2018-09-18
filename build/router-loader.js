@@ -104,9 +104,10 @@ function genRouterMap(dir, map, parent) {
             }
         } else {
             var extname = path.extname(realPath)
-            if (!/\.(js|jsx)$/.test(extname)) return
-            var basename = path.basename(realPath).replace(extname, '')
-            if (basename === 'index') {
+            if (extname !== '.vue') return
+            var basename = path.basename(realPath).replace(extname,''),
+                dirname = path.dirname(realPath).split(path.sep).pop()
+            if (basename === dirname.split(path.sep).pop()) {
                 map.file = getComponentFile(realPath)
                 map.name = getComponentName(realPath)
             }
