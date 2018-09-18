@@ -9,7 +9,7 @@ var routeMap = {
 }
 
 function removeCircular(obj) {
-    for(var i in obj) {
+    for (var i in obj) {
         if (obj.hasOwnProperty(i)) {
             if (i[0] === '_') {
                 obj[i] = null
@@ -28,7 +28,7 @@ function resolvePath(dir) {
 
 function getCloseSub(map) {
     var el = map
-    while(el) {
+    while (el) {
         if (el._isSub) {
             return el
         }
@@ -44,54 +44,69 @@ function getReleativeSubPath(realPath) {
 }
 
 function getComponentName(realPath) {
-    return Camelize(resolvePath(path.dirname(realPath).replace(DIR,'').replace(/\/@sub/g,'')))
+    return Camelize(
+        resolvePath(
+            path
+                .dirname(realPath)
+                .replace(DIR, '')
+                .replace(/\/@sub/g, '')
+        )
+    )
 }
 
 function getComponentFile(realPath) {
-    return resolvePath(realPath.replace(DIR,''))
+    return resolvePath(realPath.replace(DIR, ''))
 }
 
-function Camelize(prop){
+function Camelize(prop) {
     if (prop.indexOf('/') === 0) {
         prop = prop.slice(1)
     }
-	return prop.replace(/\/([a-z])/ig,function(all,letter){
+    return prop.replace(/\/([a-z])/gi, function(all, letter) {
         return letter.toUpperCase()
     })
 }
 
-function genRouterMap(dir,map,parent){
+function genRouterMap(dir, map, parent) {
     var fss = fs.readdirSync(dir)
     map._parent = parent
-    map._pwd = dir.replace(DIR, '')
-    fss.forEach(function(f){
+    map._pwd = resolvePath(dir.replace(DIR, ''))
+    fss.forEach(function(f) {
         var basename = path.basename(f),
-            realPath = path.resolve(dir,f)
-        if(basename[0] === '_') return
+            realPath = path.resolve(dir, f)
+        if (basename[0] === '_') return
         var stat = fs.statSync(realPath)
-        if(stat.isDirectory()){
-            if (basename === '@sub') {
+        if (stat.isDirectory()) {
+            let subDescribe = false
+            try {
+                fs.accessSync(path.join(realPath, '.sub'))
+                subDescribe = true
+            } catch (err) {}
+            if (subDescribe) {
+                map.subRoutes = map.subRoutes || {}
+                map.subRoutes['/' + basename] = {}
+                genRouterMap(realPath, map.subRoutes['/' + basename], map.subRoutes)
+            } else if (basename === '@sub') {
                 map.subRoutes = {}
                 map.subRoutes._isSub = true
-                genRouterMap(realPath,map.subRoutes,map)
+                genRouterMap(realPath, map.subRoutes, map)
             } else {
                 var el = getCloseSub(map)
                 if (el) {
                     basename = getReleativeSubPath(realPath)
                     el[basename] = {}
-                    genRouterMap(realPath,el[basename],el)
+                    genRouterMap(realPath, el[basename], el)
                 } else {
                     basename = resolvePath(map._pwd + '/' + basename)
                     routeMap[basename] = {}
-                    genRouterMap(realPath,routeMap[basename],routeMap)
+                    genRouterMap(realPath, routeMap[basename], routeMap)
                 }
             }
         } else {
             var extname = path.extname(realPath)
-            if (extname !== '.vue') return
-            var basename = path.basename(realPath).replace(extname,''),
-                dirname = path.dirname(realPath).split(path.sep).pop()
-            if (basename === dirname.split(path.sep).pop()) {
+            if (!/\.(js|jsx)$/.test(extname)) return
+            var basename = path.basename(realPath).replace(extname, '')
+            if (basename === 'index') {
                 map.file = getComponentFile(realPath)
                 map.name = getComponentName(realPath)
             }
