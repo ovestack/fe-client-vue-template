@@ -5,6 +5,8 @@ var utils = require('./utils')
 var baseWebpackConfig = require('./webpack.base.conf')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
 var NyanProgressPlugin = require('nyan-progress-webpack-plugin')
+var CleanWebpackPlugin = require('clean-webpack-plugin')
+var WriteFileWebpackPlugin = require('write-file-webpack-plugin')
 var path = require('path')
 
 // add hot-reload related code to entry chunks
@@ -24,6 +26,12 @@ module.exports = merge(baseWebpackConfig, {
         chunkFilename: utils.assetsPath('js/[name].[chunkhash:6].chunk.js')
     },
     plugins: [
+        new CleanWebpackPlugin([
+            'public/*.json',
+            'public/*.hot-update.js'
+        ], {
+            root: path.resolve(__dirname, '../')
+        }),
         // https://github.com/glenjamin/webpack-hot-middleware#installation--usage
         new webpack.HotModuleReplacementPlugin(),
         // https://github.com/ampedandwired/html-webpack-plugin
@@ -45,7 +53,8 @@ module.exports = merge(baseWebpackConfig, {
         new webpack.DllReferencePlugin({
             context: __dirname, //context 需要跟dll中的保持一致，这个用来指导 Webpack 匹配 manifest 中库的路径；
             manifest: require('../public/static/js/lib/manifest.json')
-        })
+        }),
+        new WriteFileWebpackPlugin()
     ],
     mode: 'development'
 })

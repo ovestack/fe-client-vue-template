@@ -50,10 +50,15 @@ module.exports = {
         }, {
             test: /\.js$/,
             use: [
-                'cache-loader',
                 'babel-loader',
             {
                 loader: path.join(__dirname, './router-loader')
+            },{
+                options: {
+                    eslintPath: require.resolve('eslint'),
+                    configFile: path.resolve(__dirname, '../.eslintrc.json')
+                },
+                loader: require.resolve('eslint-loader')
             }],
             include: projectRoot,
             exclude: /node_modules/
