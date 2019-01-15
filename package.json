@@ -44,7 +44,7 @@
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.4.2",
     "vuex": "^2.3.1",
-    "webpack": "^4.5.0",
+    "webpack": "^4.20.2",
     "webpack-merge": "^4.0.0"
   },
   "devDependencies": {
@@ -54,9 +54,9 @@
     "http-proxy-middleware": "^0.12.0",
     "nyan-progress-webpack-plugin": "^1.2.0",
     "serve-static": "^1.13.2",
-    "webpack-cli": "^2.0.14",
+    "webpack-cli": "^3.1.1",
     "webpack-dev-middleware": "^3.3.0",
-    "webpack-hot-middleware": "^2.22.0",
+    "webpack-hot-middleware": "^2.22.0"
     "write-file-webpack-plugin": "^4.4.0"
   },
   "main": "src/main.js"
